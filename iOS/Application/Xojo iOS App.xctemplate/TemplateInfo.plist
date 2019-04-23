@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.iphoneos</string>
+	</array>
+	<key>Project</key>
+	<dict>
+		<key>Configurations</key>
+		<dict>
+			<key>Release</key>
+			<dict>
+				<key>CODE_SIGN_ENTITLEMENTS</key>
+				<string>___PACKAGENAME___/___PACKAGENAMEASIDENTIFIER___.entitlements</string>
+			</dict>
+			<key>Debug</key>
+			<dict/>
+		</dict>
+		<key>SharedSettings</key>
+		<dict>
+			<key>OTHER_CODE_SIGN_FLAGS</key>
+			<string>--deep --force</string>
+		</dict>
+	</dict>
+	<key>Kind</key>
+	<string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+	<key>Identifier</key>
+	<string>com.xojo.xojoiosApplication</string>
+	<key>Concrete</key>
+	<true/>
+	<key>Description</key>
+	<string>Creates a new Xcode project ready to bundle or devug a Xojo built app.</string>
+	<key>SortOrder</key>
+	<integer>0</integer>
+	<key>MainTemplateFile</key>
+	<string>Usage.txt</string>
+	<key>Ancestors</key>
+	<array>
+		<string>com.apple.dt.unit.base_ProjectSettings</string>
+		<string>com.apple.dt.unit.base_Options</string>
+		<string>com.apple.dt.unit.bundleBase</string>
+	</array>
+	<key>Targets</key>
+	<array>
+		<dict>
+			<key>ProductType</key>
+			<string>com.apple.product-type.application</string>
+			<key>SharedSettings</key>
+			<dict>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>latest_iphoneos</string>
+				<key>CODE_SIGN_IDENTITY</key>
+				<string>iPhone Developer</string>
+			</dict>
+			<key>TargetIdentifier</key>
+			<string>com.apple.dt.iosApplicationTarget</string>
+			<key>Configurations</key>
+			<dict>
+				<key>Release</key>
+				<dict>
+					<key>VALIDATE_PRODUCT</key>
+					<string>YES</string>
+				</dict>
+			</dict>
+			<key>BuildPhases</key>
+			<array>
+				<dict>
+					<key>Name</key>
+					<string>Copy App Bundle</string>
+					<key>Class</key>
+					<string>ShellScript</string>
+					<key>ShellScript</key>
+					<string>#This script uses ditto to copy the app into the location Xcode expects while removing finder attributes.
+
+DEST_PATH=&quot;${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}&quot;
+
+ditto --norsrc &quot;$XOJO_BUILD_LOCATION&quot; &quot;$DEST_PATH&quot;</string>
+					<key>ShellPath</key>
+					<string>/bin/sh</string>
+					<key>ShowEnvVarsInLog</key>
+					<false/>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>Definitions</key>
+	<dict>
+		<key>Usage.txt</key>
+		<string>Usage:
+
+After creating your Xcode project, move everything in the Xcode project folder to your Xojo project folder.
+
+You must set up the Products location:
+
+1) Select the File-&gt;Project Settings menu
+2) Click the Advanced button
+3) Select Custom / Absolute for the Build Location
+4) Click the folder icon next to Products and navigate to the OS X 64 folder in your Xojo Builds folder.
+5) Create a new folder. (Xcode is a fine name)
+6) You can place the other folders where you like, but selecting the same folder is fine.
+
+Add a build script to the Xojo project, active for release.
+
+call doshellcommand(&quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild clean -scheme Release &gt; build_log.txt&quot;)
+call doshellcommand(&quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild -scheme Release &gt;&gt; build_log.txt&quot;)
+call doshellcommand(&quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild archive -scheme Release &gt;&gt; build_log.txt&quot;)
+
+
+Be sure to set &quot;Auto Increment Version&quot; to On in Xojo and make sure you&apos;re building 64bit.
+
+
+You can safely delete this file!</string>
+		<key>About.txt</key>
+		<string>About Xcode templates for Xojo.
+
+Created and Copyright 2019, Jim McKay, piDog Software. www.pidog.com
+
+These templates are free to use and free to distribute unmodified.
+
+If modified, please include credit to the original author.
+
+
+You can safely delete this file from your Xcode project.
+
+
+Xojo is a registered trademark of Xojo inc.
+Xojo Logo used with permission.</string>
+		<key>Info.plist:PackageType</key>
+		<string>&lt;key&gt;CFBundlePackageType&lt;/key&gt;
+&lt;string&gt;APPL&lt;/string&gt;
+</string>
+		<key>___PACKAGENAMEASIDENTIFIER___.entitlements</key>
+		<string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict/&gt;
+&lt;/plist&gt;</string>
+		<key>../___PACKAGENAMEASIDENTIFIER___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</key>
+		<string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Scheme
+   LastUpgradeVersion = &quot;1020&quot;
+   version = &quot;1.3&quot;&gt;
+   &lt;BuildAction
+      parallelizeBuildables = &quot;YES&quot;
+      buildImplicitDependencies = &quot;YES&quot;&gt;
+      &lt;BuildActionEntries&gt;
+         &lt;BuildActionEntry
+            buildForTesting = &quot;YES&quot;
+            buildForRunning = &quot;YES&quot;
+            buildForProfiling = &quot;YES&quot;
+            buildForArchiving = &quot;YES&quot;
+            buildForAnalyzing = &quot;YES&quot;&gt;
+            &lt;BuildableReference
+               BuildableIdentifier = &quot;primary&quot;
+               BlueprintIdentifier = &quot;384569902269254600C98F3F&quot;
+               BuildableName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
+               BlueprintName = &quot;___PACKAGENAMEASIDENTIFIER___&quot;
+               ReferencedContainer = &quot;container:___PACKAGENAMEASIDENTIFIER___.xcodeproj&quot;&gt;
+            &lt;/BuildableReference&gt;
+         &lt;/BuildActionEntry&gt;
+      &lt;/BuildActionEntries&gt;
+   &lt;/BuildAction&gt;
+   &lt;TestAction
+      buildConfiguration = &quot;Release&quot;
+      selectedDebuggerIdentifier = &quot;&quot;
+      selectedLauncherIdentifier = &quot;Xcode.IDEFoundation.Launcher.PosixSpawn&quot;
+      shouldUseLaunchSchemeArgsEnv = &quot;YES&quot;&gt;
+      &lt;Testables&gt;
+      &lt;/Testables&gt;
+      &lt;MacroExpansion&gt;
+         &lt;BuildableReference
+            BuildableIdentifier = &quot;primary&quot;
+            BlueprintIdentifier = &quot;384569902269254600C98F3F&quot;
+            BuildableName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
+            BlueprintName = &quot;___PACKAGENAMEASIDENTIFIER___&quot;
+            ReferencedContainer = &quot;container:___PACKAGENAMEASIDENTIFIER___.xcodeproj&quot;&gt;
+         &lt;/BuildableReference&gt;
+      &lt;/MacroExpansion&gt;
+      &lt;AdditionalOptions&gt;
+      &lt;/AdditionalOptions&gt;
+   &lt;/TestAction&gt;
+   &lt;LaunchAction
+      buildConfiguration = &quot;Release&quot;
+      selectedDebuggerIdentifier = &quot;Xcode.DebuggerFoundation.Debugger.LLDB&quot;
+      selectedLauncherIdentifier = &quot;Xcode.DebuggerFoundation.Launcher.LLDB&quot;
+      launchStyle = &quot;0&quot;
+      useCustomWorkingDirectory = &quot;NO&quot;
+      ignoresPersistentStateOnLaunch = &quot;NO&quot;
+      debugDocumentVersioning = &quot;YES&quot;
+      debugServiceExtension = &quot;internal&quot;
+      allowLocationSimulation = &quot;YES&quot;&gt;
+      &lt;BuildableProductRunnable
+         runnableDebuggingMode = &quot;0&quot;&gt;
+         &lt;BuildableReference
+            BuildableIdentifier = &quot;primary&quot;
+            BlueprintIdentifier = &quot;384569902269254600C98F3F&quot;
+            BuildableName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
+            BlueprintName = &quot;___PACKAGENAMEASIDENTIFIER___&quot;
+            ReferencedContainer = &quot;container:___PACKAGENAMEASIDENTIFIER___.xcodeproj&quot;&gt;
+         &lt;/BuildableReference&gt;
+      &lt;/BuildableProductRunnable&gt;
+      &lt;AdditionalOptions&gt;
+      &lt;/AdditionalOptions&gt;
+   &lt;/LaunchAction&gt;
+   &lt;ProfileAction
+      buildConfiguration = &quot;Release&quot;
+      shouldUseLaunchSchemeArgsEnv = &quot;YES&quot;
+      savedToolIdentifier = &quot;&quot;
+      useCustomWorkingDirectory = &quot;NO&quot;
+      debugDocumentVersioning = &quot;YES&quot;&gt;
+      &lt;BuildableProductRunnable
+         runnableDebuggingMode = &quot;0&quot;&gt;
+         &lt;BuildableReference
+            BuildableIdentifier = &quot;primary&quot;
+            BlueprintIdentifier = &quot;384569902269254600C98F3F&quot;
+            BuildableName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
+            BlueprintName = &quot;___PACKAGENAMEASIDENTIFIER___&quot;
+            ReferencedContainer = &quot;container:___PACKAGENAMEASIDENTIFIER___.xcodeproj&quot;&gt;
+         &lt;/BuildableReference&gt;
+      &lt;/BuildableProductRunnable&gt;
+   &lt;/ProfileAction&gt;
+   &lt;AnalyzeAction
+      buildConfiguration = &quot;Release&quot;&gt;
+   &lt;/AnalyzeAction&gt;
+   &lt;ArchiveAction
+      buildConfiguration = &quot;Release&quot;
+      customArchiveName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
+      revealArchiveInOrganizer = &quot;YES&quot;&gt;
+   &lt;/ArchiveAction&gt;
+&lt;/Scheme&gt;</string>
+	</dict>
+	<key>Nodes</key>
+	<array>
+		<string>Usage.txt</string>
+		<string>About.txt</string>
+		<string>Info.plist:PackageType</string>
+		<string>../___PACKAGENAMEASIDENTIFIER___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</string>
+		<string>___PACKAGENAMEASIDENTIFIER___.entitlements</string>
+	</array>
+</dict>
+</plist>
