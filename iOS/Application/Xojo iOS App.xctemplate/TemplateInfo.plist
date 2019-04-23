@@ -13,7 +13,7 @@
 			<key>Release</key>
 			<dict>
 				<key>CODE_SIGN_ENTITLEMENTS</key>
-				<string>___PACKAGENAME___/___PACKAGENAMEASIDENTIFIER___.entitlements</string>
+				<string>___PACKAGENAME___/___PACKAGENAME___.entitlements</string>
 			</dict>
 			<key>Debug</key>
 			<dict/>
@@ -92,27 +92,23 @@ ditto --norsrc &quot;$XOJO_BUILD_LOCATION&quot; &quot;$DEST_PATH&quot;</string>
 	<key>Definitions</key>
 	<dict>
 		<key>Usage.txt</key>
-		<string>Usage:
+		<string>Installation:
+
+Download the templates. Move the iOS and macOS folders to &quot;~/Library/Developer/Xcode/Templates/Project Templates&quot; creating folders as needed.
+
+Usage:
 
 After creating your Xcode project, move everything in the Xcode project folder to your Xojo project folder.
 
-You must set up the Products location:
 
-1) Select the File-&gt;Project Settings menu
-2) Click the Advanced button
-3) Select Custom / Absolute for the Build Location
-4) Click the folder icon next to Products and navigate to the OS X 64 folder in your Xojo Builds folder.
-5) Create a new folder. (Xcode is a fine name)
-6) You can place the other folders where you like, but selecting the same folder is fine.
+Next, add a build script to the Xojo project, active for release.
 
-Add a build script to the Xojo project, active for release.
+```
+dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/&quot;+CurrentBuildAppName+&quot;.app&quot;&quot;;&quot;
 
-call doshellcommand(&quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild clean -scheme Release &gt; build_log.txt&quot;)
-call doshellcommand(&quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild -scheme Release &gt;&gt; build_log.txt&quot;)
-call doshellcommand(&quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild archive -scheme Release &gt;&gt; build_log.txt&quot;)
-
-
-Be sure to set &quot;Auto Increment Version&quot; to On in Xojo and make sure you&apos;re building 64bit.
+call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild clean -scheme Release &gt; build_log.txt&quot;)
+call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild -scheme Release &gt;&gt; build_log.txt&quot;)
+```
 
 
 You can safely delete this file!</string>
@@ -135,13 +131,13 @@ Xojo Logo used with permission.</string>
 		<string>&lt;key&gt;CFBundlePackageType&lt;/key&gt;
 &lt;string&gt;APPL&lt;/string&gt;
 </string>
-		<key>___PACKAGENAMEASIDENTIFIER___.entitlements</key>
+		<key>___PACKAGENAME___.entitlements</key>
 		<string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
 &lt;plist version=&quot;1.0&quot;&gt;
 &lt;dict/&gt;
 &lt;/plist&gt;</string>
-		<key>../___PACKAGENAMEASIDENTIFIER___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</key>
+		<key>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</key>
 		<string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;Scheme
    LastUpgradeVersion = &quot;1020&quot;
@@ -159,9 +155,9 @@ Xojo Logo used with permission.</string>
             &lt;BuildableReference
                BuildableIdentifier = &quot;primary&quot;
                BlueprintIdentifier = &quot;384569902269254600C98F3F&quot;
-               BuildableName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
-               BlueprintName = &quot;___PACKAGENAMEASIDENTIFIER___&quot;
-               ReferencedContainer = &quot;container:___PACKAGENAMEASIDENTIFIER___.xcodeproj&quot;&gt;
+               BuildableName = &quot;___PACKAGENAME___.app&quot;
+               BlueprintName = &quot;___PACKAGENAME___&quot;
+               ReferencedContainer = &quot;container:___PACKAGENAME___.xcodeproj&quot;&gt;
             &lt;/BuildableReference&gt;
          &lt;/BuildActionEntry&gt;
       &lt;/BuildActionEntries&gt;
@@ -177,9 +173,9 @@ Xojo Logo used with permission.</string>
          &lt;BuildableReference
             BuildableIdentifier = &quot;primary&quot;
             BlueprintIdentifier = &quot;384569902269254600C98F3F&quot;
-            BuildableName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
-            BlueprintName = &quot;___PACKAGENAMEASIDENTIFIER___&quot;
-            ReferencedContainer = &quot;container:___PACKAGENAMEASIDENTIFIER___.xcodeproj&quot;&gt;
+            BuildableName = &quot;___PACKAGENAME___.app&quot;
+            BlueprintName = &quot;___PACKAGENAME___&quot;
+            ReferencedContainer = &quot;container:___PACKAGENAME___.xcodeproj&quot;&gt;
          &lt;/BuildableReference&gt;
       &lt;/MacroExpansion&gt;
       &lt;AdditionalOptions&gt;
@@ -200,9 +196,9 @@ Xojo Logo used with permission.</string>
          &lt;BuildableReference
             BuildableIdentifier = &quot;primary&quot;
             BlueprintIdentifier = &quot;384569902269254600C98F3F&quot;
-            BuildableName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
-            BlueprintName = &quot;___PACKAGENAMEASIDENTIFIER___&quot;
-            ReferencedContainer = &quot;container:___PACKAGENAMEASIDENTIFIER___.xcodeproj&quot;&gt;
+            BuildableName = &quot;___PACKAGENAME___.app&quot;
+            BlueprintName = &quot;___PACKAGENAME___&quot;
+            ReferencedContainer = &quot;container:___PACKAGENAME___.xcodeproj&quot;&gt;
          &lt;/BuildableReference&gt;
       &lt;/BuildableProductRunnable&gt;
       &lt;AdditionalOptions&gt;
@@ -219,9 +215,9 @@ Xojo Logo used with permission.</string>
          &lt;BuildableReference
             BuildableIdentifier = &quot;primary&quot;
             BlueprintIdentifier = &quot;384569902269254600C98F3F&quot;
-            BuildableName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
-            BlueprintName = &quot;___PACKAGENAMEASIDENTIFIER___&quot;
-            ReferencedContainer = &quot;container:___PACKAGENAMEASIDENTIFIER___.xcodeproj&quot;&gt;
+            BuildableName = &quot;___PACKAGENAME___.app&quot;
+            BlueprintName = &quot;___PACKAGENAME___&quot;
+            ReferencedContainer = &quot;container:___PACKAGENAME___.xcodeproj&quot;&gt;
          &lt;/BuildableReference&gt;
       &lt;/BuildableProductRunnable&gt;
    &lt;/ProfileAction&gt;
@@ -230,7 +226,7 @@ Xojo Logo used with permission.</string>
    &lt;/AnalyzeAction&gt;
    &lt;ArchiveAction
       buildConfiguration = &quot;Release&quot;
-      customArchiveName = &quot;___PACKAGENAMEASIDENTIFIER___.app&quot;
+      customArchiveName = &quot;___PACKAGENAME___.app&quot;
       revealArchiveInOrganizer = &quot;YES&quot;&gt;
    &lt;/ArchiveAction&gt;
 &lt;/Scheme&gt;</string>
@@ -240,8 +236,8 @@ Xojo Logo used with permission.</string>
 		<string>Usage.txt</string>
 		<string>About.txt</string>
 		<string>Info.plist:PackageType</string>
-		<string>../___PACKAGENAMEASIDENTIFIER___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</string>
-		<string>___PACKAGENAMEASIDENTIFIER___.entitlements</string>
+		<string>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</string>
+		<string>___PACKAGENAME___.entitlements</string>
 	</array>
 </dict>
 </plist>

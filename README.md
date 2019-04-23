@@ -10,11 +10,11 @@ After creating your Xcode project, move everything in the Xcode project folder t
 Next, add a build script to the Xojo project, active for release.
 
 ```
-dim setAppPath as string = "export XOJO_BUILD_LOCATION="+CurrentBuildLocationNative+"/"+CurrentBuildAppName+".app;"
+dim setAppPath as string = "export XOJO_BUILD_LOCATION="""+CurrentBuildLocationNative+"/"+CurrentBuildAppName+".app"";"
 
-call doshellcommand(setAppPath + "cd ""$PROJECT_PATH""; xcodebuild clean -scheme Build > build_log.txt")
-call doshellcommand(setAppPath + "cd ""$PROJECT_PATH""; xcodebuild -scheme Build >> build_log.txt")
-call doshellcommand(setAppPath + "cd ""$PROJECT_PATH""; xcodebuild archive -scheme Build >> build_log.txt")
+call doshellcommand(setAppPath + "cd ""$PROJECT_PATH""; xcodebuild clean -scheme Release > build_log.txt")
+call doshellcommand(setAppPath + "cd ""$PROJECT_PATH""; xcodebuild -scheme Release >> build_log.txt")
+call doshellcommand(setAppPath + "cd ""$PROJECT_PATH""; xcodebuild archive -scheme Release >> build_log.txt")
 ```
 
 
@@ -22,7 +22,7 @@ call doshellcommand(setAppPath + "cd ""$PROJECT_PATH""; xcodebuild archive -sche
 To debug the Xojo app in sandboxed mode, add a Build script active for debug:
 
 ```
-dim setAppPath as string = "export XOJO_BUILD_LOCATION="+CurrentBuildLocationNative+"/"+CurrentBuildAppName+".app;"
+dim setAppPath as string = "export XOJO_BUILD_LOCATION="""+CurrentBuildLocationNative+"/"+CurrentBuildAppName+".app"";"
 
 call doshellcommand(setAppPath + " cd ""$PROJECT_PATH"";  xcodebuild -scheme Debug > debug_log.txt")
 ```
