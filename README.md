@@ -1,8 +1,8 @@
-Installation:
+**Installation:**
 
 Download the templates. Move the iOS and macOS folders to "~/Library/Developer/Xcode/Templates/Project Templates" creating folders as needed.
 
-Usage:
+**Usage:**
 
 After creating your Xcode project, move everything in the Xcode project folder to your Xojo project folder.
 
@@ -28,7 +28,7 @@ call doshellcommand(setAppPath + " cd ""$PROJECT_PATH"";  xcodebuild -scheme Deb
 ```
 
 
-Be sure to set "Auto Increment Version" to On in Xojo and make sure you're building 64bit.
+*Be sure to set "Auto Increment Version" to On in Xojo and make sure you're building 64bit.*
 
 
 You can safely delete this file!
