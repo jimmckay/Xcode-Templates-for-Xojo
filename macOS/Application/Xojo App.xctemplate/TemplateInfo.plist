@@ -110,10 +110,12 @@ REGEX=&quot;([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)&quot;
 if [[ $BUNDLE_VERSION =~ $REGEX ]]
 then
 BUNDLE_VERSION=&quot;${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[5]}&quot;
+BUNDLE_SHORT_VERSION=&quot;${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}&quot;
 
 defaults write &quot;$PLISTPATH&quot; CFBundleVersion $BUNDLE_VERSION
+defaults write &quot;$PLISTPATH&quot; CFBundleShortVersionString $BUNDLE_VERSION
 
-echo &quot;Writing bundle version ${BUNDLE_VERSION}&quot;
+echo &quot;Writing bundle version CFBundleVersion=${BUNDLE_VERSION} CFBundleShortVersionString=${BUNDLE_VERSION}&quot;
 
 fi</string>
 					<key>Class</key>
@@ -130,7 +132,7 @@ fi</string>
 		<string>Usage.txt</string>
 		<string>Info.plist:CategoryType</string>
 		<string>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/Debug.xcscheme</string>
-		<string>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</string>
+		<string>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/___PACKAGENAME___.xcscheme</string>
 		<string>___PACKAGENAME___.entitlements</string>
 		<string>debug.entitlements</string>
 	</array>
@@ -162,9 +164,9 @@ Next, add a build script to the Xojo project, active for release.
 ---
 dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/&quot;+CurrentBuildAppName+&quot;.app&quot;&quot;;&quot;
 
-call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild clean -scheme Release &gt; build_log.txt&quot;)
-call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild -scheme Release &gt;&gt; build_log.txt&quot;)
-call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild archive -scheme Release &gt;&gt; build_log.txt&quot;)
+call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild clean -scheme ___PACKAGENAME___ &gt; build_log.txt&quot;)
+call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt&quot;)
+call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild archive -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt&quot;)
 ---
 
 
@@ -181,7 +183,7 @@ Be sure to set &quot;Auto Increment Version&quot; to On in Xojo and make sure yo
 
 
 You can safely delete this file!</string>
-		<key>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</key>
+		<key>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/___PACKAGENAME___.xcscheme</key>
 		<string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;Scheme
    LastUpgradeVersion = &quot;1020&quot;
@@ -379,7 +381,7 @@ You can safely delete this file!</string>
       buildConfiguration = &quot;Debug&quot;&gt;
    &lt;/AnalyzeAction&gt;
    &lt;ArchiveAction
-      buildConfiguration = &quot;Release&quot;
+      buildConfiguration = &quot;Debug&quot;
       customArchiveName = &quot;___PACKAGENAME___.app&quot;
       revealArchiveInOrganizer = &quot;YES&quot;&gt;
    &lt;/ArchiveAction&gt;

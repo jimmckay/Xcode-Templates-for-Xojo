@@ -106,8 +106,8 @@ Next, add a build script to the Xojo project, active for release.
 ```
 dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/&quot;+CurrentBuildAppName+&quot;.app&quot;&quot;;&quot;
 
-call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild clean -scheme Release &gt; build_log.txt&quot;)
-call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild -scheme Release &gt;&gt; build_log.txt&quot;)
+call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild clean -scheme ___PACKAGENAME___ &gt; build_log.txt&quot;)
+call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt&quot;)
 ```
 
 
@@ -137,7 +137,7 @@ Xojo Logo used with permission.</string>
 &lt;plist version=&quot;1.0&quot;&gt;
 &lt;dict/&gt;
 &lt;/plist&gt;</string>
-		<key>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</key>
+		<key>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/___PACKAGENAME___.xcscheme</key>
 		<string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;Scheme
    LastUpgradeVersion = &quot;1020&quot;
@@ -236,7 +236,7 @@ Xojo Logo used with permission.</string>
 		<string>Usage.txt</string>
 		<string>About.txt</string>
 		<string>Info.plist:PackageType</string>
-		<string>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/Release.xcscheme</string>
+		<string>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/___PACKAGENAME___.xcscheme</string>
 		<string>___PACKAGENAME___.entitlements</string>
 	</array>
 </dict>
