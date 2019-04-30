@@ -4,7 +4,7 @@ Download the templates. Move the iOS and macOS folders to "~/Library/Developer/X
 
 **Usage:**
 
-Create an Xcode project with the same name as your Xojo project. 
+Create an Xcode project using the **Xojo App** template with the same name as your Xojo project. 
 ***BE CAREFUL NOT TO OVERWRITE THE Xojo PROJECT!***
 
 After creating your Xcode project, move everything in the Xcode project folder to your Xojo project folder.
@@ -34,4 +34,13 @@ call doshellcommand(setAppPath + " cd ""$PROJECT_PATH"";  xcodebuild -scheme Deb
 *Be sure to set "Auto Increment Version" to On in Xojo and make sure you're building 64bit.*
 
 
-You can safely delete this file!
+For iOS projects, add the following Build script to the Xojo project after Following the above steps, but selecting the **Xojo iOS App** project template.
+
+```
+dim setAppPath as string = "export XOJO_BUILD_LOCATION="""+CurrentBuildLocationNative+"/"+CurrentBuildAppName+".app"";"
+
+call doshellcommand(setAppPath + "cd ""$PROJECT_PATH""; xcodebuild clean -scheme ___PACKAGENAME___ > build_log.txt")
+call doshellcommand(setAppPath + "cd ""$PROJECT_PATH""; xcodebuild -scheme ___PACKAGENAME___ >> build_log.txt")
+```
+
+
