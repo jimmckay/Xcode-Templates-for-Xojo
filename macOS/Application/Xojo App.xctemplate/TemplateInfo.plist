@@ -283,11 +283,29 @@ You can safely delete this file!</string>
    &lt;BuildAction
       parallelizeBuildables = &quot;YES&quot;
       buildImplicitDependencies = &quot;YES&quot;&gt;
+      &lt;PreActions&gt;
+         &lt;ExecutionAction
+            ActionType = &quot;Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction&quot;&gt;
+            &lt;ActionContent
+               title = &quot;Create Debug Entitlements&quot;
+               scriptText = &quot;echo &amp;quot;Writting debug entitlements file&amp;quot; &amp;#10;rm &amp;quot;${SOURCE_ROOT}/___PACKAGENAME___/debug.entitlements&amp;quot;&amp;#10;cp &amp;quot;${SOURCE_ROOT}/___PACKAGENAME___/___PACKAGENAME___.entitlements&amp;quot; &amp;quot;${SOURCE_ROOT}/___PACKAGENAME___/debug.entitlements&amp;quot;&amp;#10;plutil -replace &amp;quot;com\.apple\.security\.network\.client&amp;quot; -bool YES &amp;quot;${SOURCE_ROOT}/___PACKAGENAME___/debug.entitlements&amp;quot;&amp;#10;plutil -replace &amp;quot;com\.apple\.security\.network\.server&amp;quot; -bool YES &amp;quot;${SOURCE_ROOT}/___PACKAGENAME___/debug.entitlements&amp;quot;&amp;#10;&quot;&gt;
+               &lt;EnvironmentBuildable&gt;
+                  &lt;BuildableReference
+                     BuildableIdentifier = &quot;primary&quot;
+                     BlueprintIdentifier = &quot;38CFBB5D226916EC00354580&quot;
+               BuildableName = &quot;___PACKAGENAME___.app&quot;
+               BlueprintName = &quot;___PACKAGENAME___&quot;
+               ReferencedContainer = &quot;container:___PACKAGENAME___.xcodeproj&quot;&gt;
+                  &lt;/BuildableReference&gt;
+               &lt;/EnvironmentBuildable&gt;
+            &lt;/ActionContent&gt;
+         &lt;/ExecutionAction&gt;
+      &lt;/PreActions&gt;
       &lt;PostActions&gt;
          &lt;ExecutionAction
             ActionType = &quot;Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction&quot;&gt;
             &lt;ActionContent
-               title = &quot;Run Script&quot;
+               title = &quot;Move Debug App to Xojo Run Location&quot;
                scriptText = &quot;BUILD_PATH=&amp;quot;$BUILT_PRODUCTS_DIR/$WRAPPER_NAME&amp;quot;&amp;#10;&amp;#10;rm -r &amp;quot;$XOJO_BUILD_LOCATION&amp;quot;&amp;#10;mv &amp;quot;$BUILD_PATH&amp;quot; &amp;quot;$XOJO_BUILD_LOCATION&amp;quot;&amp;#10;&quot;&gt;
                &lt;EnvironmentBuildable&gt;
                   &lt;BuildableReference
@@ -386,21 +404,6 @@ You can safely delete this file!</string>
       revealArchiveInOrganizer = &quot;YES&quot;&gt;
    &lt;/ArchiveAction&gt;
 &lt;/Scheme&gt;</string>
-		<key>debug.entitlements</key>
-		<string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
-&lt;plist version=&quot;1.0&quot;&gt;
-&lt;dict&gt;
-	&lt;key&gt;com.apple.security.app-sandbox&lt;/key&gt;
-	&lt;true/&gt;
-	&lt;key&gt;com.apple.security.files.user-selected.read-only&lt;/key&gt;
-	&lt;true/&gt;
-	&lt;key&gt;com.apple.security.network.client&lt;/key&gt;
-	&lt;true/&gt;
-	&lt;key&gt;com.apple.security.network.server&lt;/key&gt;
-	&lt;true/&gt;
-&lt;/dict&gt;
-&lt;/plist&gt;</string>
 		<key>___PACKAGENAME___.entitlements</key>
 		<string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
@@ -414,7 +417,7 @@ You can safely delete this file!</string>
 &lt;/plist&gt;</string>
 		<key>Info.plist:CategoryType</key>
 		<string>&lt;key&gt;LSApplicationCategoryType&lt;/key&gt;
-&lt;string&gt;APPL&lt;/string&gt;
+&lt;string&gt;None&lt;/string&gt;
 </string>
 	</dict>
 </dict>
