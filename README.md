@@ -1,6 +1,9 @@
 **Installation:**
 
-Download the templates. Move the iOS and macOS folders to "~/Library/Developer/Xcode/Templates/Project Templates" creating folders as needed.
+Download the templates. 
+<https://bitbucket.org/pidog/xcode-templates-for-xojo/downloads/>
+
+Move the iOS and macOS folders to "~/Library/Developer/Xcode/Templates/Project Templates" creating folders as needed.
 
 **Usage:**
 
