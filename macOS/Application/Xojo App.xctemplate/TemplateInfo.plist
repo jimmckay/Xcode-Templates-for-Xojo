@@ -158,6 +158,9 @@ Xojo Logo used with permission.</string>
 
 After creating your Xcode project, move everything in the Xcode project folder to your Xojo project folder.
 
+Add Entitlements in the Capabilities tab of your build product.
+
+Be sure code signing identity is set.
 
 Next, add a build script to the Xojo project, active for release.
 
