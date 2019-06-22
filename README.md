@@ -8,7 +8,7 @@ Move the iOS and macOS folders to "~/Library/Developer/Xcode/Templates/Project T
 
 **Usage:**
 
-Create an Xcode project using the **Xojo App** template with the same name as your Xojo project. 
+Create an Xcode project using the **Xojo App** template with the same name as your Xojo project.  
 ***BE CAREFUL NOT TO OVERWRITE THE Xojo PROJECT!***
 
 After creating your Xcode project, move everything in the Xcode project folder to your Xojo project folder.
