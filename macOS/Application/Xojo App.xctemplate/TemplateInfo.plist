@@ -38,7 +38,7 @@
 	<key>SortOrder</key>
 	<integer>0</integer>
 	<key>MainTemplateFile</key>
-	<string>Usage.txt</string>
+	<string>Usage.md</string>
 	<key>Ancestors</key>
 	<array>
 		<string>com.apple.dt.unit.base_ProjectSettings</string>
@@ -129,7 +129,7 @@ fi</string>
 	<key>Nodes</key>
 	<array>
 		<string>About.txt</string>
-		<string>Usage.txt</string>
+		<string>Usage.md</string>
 		<string>Info.plist:CategoryType</string>
 		<string>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/Debug.xcscheme</string>
 		<string>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/___PACKAGENAME___.xcscheme</string>
@@ -141,11 +141,13 @@ fi</string>
 		<key>About.txt</key>
 		<string>About Xcode templates for Xojo.
 
+v1.1
+
 Created and Copyright 2019, Jim McKay, piDog Software. www.pidog.com
 
 These templates are free to use and free to distribute unmodified.
 
-If modified, please include credit to the original author.
+Please include credit to the original author.
 
 
 You can safely delete this file from your Xcode project.
@@ -153,39 +155,72 @@ You can safely delete this file from your Xcode project.
 
 Xojo is a registered trademark of Xojo inc.
 Xojo Logo used with permission.</string>
-		<key>Usage.txt</key>
-		<string>Usage:
+		<key>Usage.md</key>
+		<string>## Usage:  
 
-After creating your Xcode project, move everything in the Xcode project folder to your Xojo project folder.
+Your Xcode project should reside in **[your Xojo project folder]/Xcode/[your Xojo App Name]**    
+  
+Add Entitlements in the Capabilities tab of your build product as needed.    
+Add Hardened Runtime setting as needed.  
+  
+**Be sure code signing identity is set.**    
+  
+Next, add a **build script** to the Xojo project, active for **release**:    
+  
+```
+//sets XOJO_BUILD_LOCATION for the Xcode project scripts  
+dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/&quot;+CurrentBuildAppName+&quot;.app&quot;&quot;;&quot;    
+//cd Xcode to the folder where the xcodeproj file lives  
+dim cdProjectPath as string = &quot;cd  &quot;&quot;$PROJECT_PATH&quot;+&quot;/Xcode/&quot;+CurrentBuildAppName+&quot;&quot;&quot;;&quot;    
+  
+//clean any previous build  
+call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild clean -scheme ___PACKAGENAME___ &gt; build_log.txt 2&gt;&amp;1&quot;)  
+//do the work  
+call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
+//Add to Xcode Organizer  
+call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild archive -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
+```  
+**Exporting a signed app**  
+For Xcode to export the app without using the Organizer, you will need an exportOption.plist file  
+ - First, build and archive the app to the Organizer as outlined above.  
+ - Next, follow the steps in the organizer to export the app as you would like it to be done.  
+ - After export, you&apos;ll find an ExportOptions.plist next to the exported app.  
+ - Place that file in the Xcode project folder.  
+ - Replace the last line of the Xojo build script above with: (or add to it)  
+ ```
+ call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild archive -archivePath ./Exports/&quot;+CurrentBuildAppName+&quot;.xcarchive -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
+ call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild -exportArchive -archivePath ./Exports/&quot;+CurrentBuildAppName+&quot;.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ./Exports/ &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
+ ```
+**Upload to App Store**  
+ To upload the app to the app store, you can use the first method and submit from within the Organizer, or...      
+ Edit the ExportOptions.plist as follows:  
+ - Change the **method** value to app-store    
+ - Add a &lt;key&gt;destination&lt;/key&gt;  
+ - Add a &lt;value&gt;upload&lt;/value&gt;  
+   
+ You can also have multiple plists for export and upload.  
+  
+You can also replace -exportArchive above with -exportNotarizedApp (Not recommended as that this may take some time and occupy the Xojo IDE until finished)      
+see my [notarizer](http://www.github/jimmckay/notarizer) script for an alternative solution.  
+   
+**Sandboxed Debugging**  
+To debug the Xojo app in sandboxed mode, add a **Build script** active for **debug**:  
 
-Add Entitlements in the Capabilities tab of your build product.
-
-Be sure code signing identity is set.
-
-Next, add a build script to the Xojo project, active for release.
-
----
-dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/&quot;+CurrentBuildAppName+&quot;.app&quot;&quot;;&quot;
-
-call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild clean -scheme ___PACKAGENAME___ &gt; build_log.txt&quot;)
-call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt&quot;)
-call doshellcommand(setAppPath + &quot;cd &quot;&quot;$PROJECT_PATH&quot;&quot;; xcodebuild archive -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt&quot;)
----
-
-
-To debug the Xojo app in sandboxed mode, add a Build script active for debug:
-
----
-dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/&quot;+CurrentBuildAppName+&quot;.app&quot;&quot;;&quot;
-
-call doshellcommand(setAppPath + &quot; cd &quot;&quot;$PROJECT_PATH&quot;&quot;;  xcodebuild -scheme Debug &gt; debug_log.txt&quot;)
----
-
-
-Be sure to set &quot;Auto Increment Version&quot; to On in Xojo and make sure you&apos;re building 64bit.
-
-
-You can safely delete this file!</string>
+```
+//sets XOJO_BUILD_LOCATION for the Xcode project scripts  
+dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/&quot;+CurrentBuildAppName+&quot;.app&quot;&quot;;&quot;    
+//strip the .debug from the app name  
+dim realAppName as string = CurrentBuildAppName.Left(CurrentBuildAppName.instr(&quot;.&quot;)-1)  
+//cd Xcode to the folder where the xcodeproj file lives  
+dim cdProjectPath as string = &quot;cd  &quot;&quot;$PROJECT_PATH&quot;+&quot;/Xcode/&quot;+realAppName+&quot;&quot;&quot;;&quot;    
+  
+//do the work. The debug scheme adds needed entitlements for debugging and puts the app where Xojo expects it to be  
+call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild -scheme Debug &gt; debug_log.txt 2&gt;&amp;1&quot;)  
+```  
+  
+  
+Be sure to set **Auto Increment Version** to **On** in Xojo and make sure you&apos;re building 64bit.  
+</string>
 		<key>../___PACKAGENAME___.xcodeproj/xcshareddata/xcschemes/___PACKAGENAME___.xcscheme</key>
 		<string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;Scheme
