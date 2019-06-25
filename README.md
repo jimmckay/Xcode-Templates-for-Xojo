@@ -16,7 +16,7 @@ In the Xcode project, set capabilites (sandbox, entitlements, hardened runtime e
   
 In the Xcode project, see the **Usage.md** file for the build scripts to add to your Xojo project.  
   
-After the build scripts have been enabled, the app will appear in the **Xcode Organizer Window**  
+After the build scripts have been enabled, the app will appear in the **Xcode Organizer Window**  after a build.
   
 Access the Organizer in the Xcode menu **Window->Organizer**  
   
