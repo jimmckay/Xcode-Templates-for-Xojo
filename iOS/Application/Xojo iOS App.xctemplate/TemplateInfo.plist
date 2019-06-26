@@ -95,7 +95,7 @@ ditto --norsrc &quot;$XOJO_BUILD_LOCATION&quot; &quot;$DEST_PATH&quot;</string>
 		<string>## Usage
 
 
-Your Xcode project should reside in **[your Xojo project folder]/Xcode/[your Xojo App Name]**    
+Your Xcode project should reside in **[your Xojo project folder]/Xcode/___PACKAGENAME___**    
 
 
 
@@ -103,11 +103,9 @@ Next, add a **build script** to the Xojo project, active for **release**.
 
 ```
 //sets XOJO_BUILD_LOCATION for the Xcode project scripts  
-dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/&quot;+CurrentBuildAppName+&quot;&quot;&quot;;&quot;  
-//strip the .app from the app name  
-dim realAppName as string = CurrentBuildAppName.Left(CurrentBuildAppName.instr(&quot;.&quot;)-1)  
+dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/___PACKAGENAME___.app&quot;&quot;;&quot;  
 //cd Xcode to the folder where the xcodeproj file lives  
-dim cdProjectPath as string = &quot;cd  &quot;&quot;$PROJECT_PATH&quot;+&quot;/Xcode/&quot;+realAppName+&quot;&quot;&quot;;&quot;    
+dim cdProjectPath as string = &quot;cd  &quot;&quot;$PROJECT_PATH&quot;+&quot;/Xcode/___PACKAGENAME___&quot;&quot;;&quot;    
 
 //clean any previous build  
 call doshellcommand(setAppPath + cdProjectPath + &quot; xcodebuild clean -scheme ___PACKAGENAME___ &gt; build_log.txt 2&gt;&amp;1&quot;)  
