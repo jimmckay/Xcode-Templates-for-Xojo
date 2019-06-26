@@ -2,7 +2,7 @@
   
 **Installation:**    
   
-[Download the templates](https://github.com/jimmckay/Xcode-Templates-for-Xojo/archive/v1.0.zip).     
+[Download the templates](https://github.com/jimmckay/Xcode-Templates-for-Xojo/releases).     
   
 Move the iOS and macOS folders to "~/Library/Developer/Xcode/Templates/Project Templates" creating folders as needed.    
   
