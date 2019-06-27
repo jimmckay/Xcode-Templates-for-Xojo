@@ -159,8 +159,9 @@ Xojo Logo used with permission.</string>
 
 Your Xcode project should reside in **[your Xojo project folder]/Xcode/___PACKAGENAME___**    
   
+Set the App Catergory in the **Identity** section of the **Info** Tab for your Target.
 Add Entitlements in the Capabilities tab of your build product as needed.    
-Add Hardened Runtime setting as needed.  
+Add Hardened Runtime settings as needed.  
   
 **Be sure code signing identity is set.**    
   
@@ -207,7 +208,8 @@ see my [notarizer](http://www.github/jimmckay/notarizer) script for an alternati
 **Sandboxed Debugging**  
 To debug the Xojo app in sandboxed mode, add a **Build script** active for **debug**:  
 
-**YOU MUST ENABLE DEVELOPMENT SIGNING IN XCODE FIRST**
+**YOU MUST ENABLE DEVELOPMENT SIGNING IN XCODE FIRST** (in the **Signing** section of the **Info** Tab for your Target) 
+  
 ```
 //sets XOJO_BUILD_LOCATION for the Xcode project scripts  
 dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+CurrentBuildLocationNative+&quot;/___PACKAGENAME___.debug.app&quot;&quot;;&quot;    
