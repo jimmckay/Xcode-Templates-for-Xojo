@@ -1,4 +1,4 @@
-# Xcode Templates for Xojo v1.1    
+# Xcode Templates for Xojo v1.1.1    
   
 **Installation:**    
   
