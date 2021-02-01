@@ -174,11 +174,11 @@ dim setAppPath as string = &quot;export XOJO_BUILD_LOCATION=&quot;&quot;&quot;+C
 dim cdProjectPath as string = &quot;cd  &quot;&quot;$PROJECT_PATH&quot;+&quot;/Xcode/___PACKAGENAME___&quot;&quot;;&quot;    
   
 //clean any previous build  
-call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild clean -scheme ___PACKAGENAME___ &gt; build_log.txt 2&gt;&amp;1&quot;)  
+call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild clean -scheme &quot;___PACKAGENAME___&quot; &gt; build_log.txt 2&gt;&amp;1&quot;)  
 //do the work  
-call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
+call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild -scheme &quot;___PACKAGENAME___&quot; &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
 //Add to Xcode Organizer  
-call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild archive -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
+call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild archive -scheme &quot;___PACKAGENAME___&quot; &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
 ```  
 **Exporting a signed app**  
 For Xcode to export the app without using the Organizer, you will need an exportOption.plist file  
@@ -189,9 +189,9 @@ For Xcode to export the app without using the Organizer, you will need an export
  - Replace the last line of the Xojo build script above with: (or add to it)  
  ```
  //Export an .xcarchive from Xcode
- call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild archive -archivePath ./Exports/___PACKAGENAME___.xcarchive -scheme ___PACKAGENAME___ &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
+ call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild archive -archivePath &quot;&quot;./Exports/___PACKAGENAME___.xcarchive&quot;&quot; -scheme &quot;___PACKAGENAME___&quot; &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
  //Export the signed app from the exported archive
- call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild -exportArchive -archivePath ./Exports/___PACKAGENAME___.xcarchive -exportOptionsPlist ExportOptions.plist -exportPath ./Exports/ &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
+ call doshellcommand(setAppPath + cdProjectPath + &quot;xcodebuild -exportArchive -archivePath &quot;&quot;./Exports/___PACKAGENAME___.xcarchive&quot;&quot; -exportOptionsPlist ExportOptions.plist -exportPath ./Exports/ &gt;&gt; build_log.txt 2&gt;&amp;1&quot;)    
  ```
 **Upload to App Store**  
  To upload the app to the app store, you can use the first method and submit from within the Organizer, or...      
